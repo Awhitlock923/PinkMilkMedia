@@ -1,0 +1,22 @@
+﻿@model IEnumerable<PinkMilkMedia.Models.Album>
+
+@{
+    ViewData["Title"] = "Photos";
+}
+
+<h1>Photos</h1>
+
+<p>
+    <a asp-action="CPhotos">Add Photos</a>
+</p>
+
+<body>
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div>
+                <img src="@(item.link)" height="300" width="300">
+            </div>
+        }
+    </div>
+</body>

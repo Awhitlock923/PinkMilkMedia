@@ -1,0 +1,26 @@
+﻿using System;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using PinkMilkMedia.Models;
+
+[assembly: HostingStartup(typeof(PinkMilkMedia.Areas.Identity.IdentityHostingStartup))]
+namespace PinkMilkMedia.Areas.Identity
+{
+    public class IdentityHostingStartup : IHostingStartup
+    {
+        public void Configure(IWebHostBuilder builder)
+        {
+            builder.ConfigureServices((context, services) => {
+                services.AddDefaultIdentity<Owner>(Options =>
+                {
+
+                })
+                .AddEntityFrameworkStores<PinkMilkMediaContext>();
+            });
+        }
+    }
+}

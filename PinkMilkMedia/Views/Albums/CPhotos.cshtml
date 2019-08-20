@@ -1,0 +1,34 @@
+﻿@model PinkMilkMedia.Models.Photo
+
+@{
+    ViewData["Title"] = "CPhotos";
+}
+
+<h1>CPhotos</h1>
+
+<h4>Photo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CPhotos">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="path" class="control-label"></label>
+                <input asp-for="path" class="form-control" />
+                <span asp-validation-for="path" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" value="@(Model.Id)" readonly>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
