@@ -10,8 +10,8 @@ using PinkMilkMedia.Models;
 namespace PinkMilkMedia.Migrations
 {
     [DbContext(typeof(PinkMilkMediaContext))]
-    [Migration("20190820231906_ai")]
-    partial class ai
+    [Migration("20190828192247_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -143,8 +143,6 @@ namespace PinkMilkMedia.Migrations
 
                     b.Property<DateTime>("DateOfShoot");
 
-                    b.Property<string>("FullameId");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("OwnerId");
@@ -152,8 +150,6 @@ namespace PinkMilkMedia.Migrations
                     b.Property<string>("link");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FullameId");
 
                     b.HasIndex("OwnerId");
 
@@ -166,6 +162,8 @@ namespace PinkMilkMedia.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<int?>("AlbumId");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -199,10 +197,14 @@ namespace PinkMilkMedia.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
+                    b.Property<int>("TypeId");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AlbumId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -217,7 +219,7 @@ namespace PinkMilkMedia.Migrations
 
             modelBuilder.Entity("PinkMilkMedia.Models.Photo", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -227,7 +229,7 @@ namespace PinkMilkMedia.Migrations
 
                     b.Property<string>("path");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("AlbumId1");
 
@@ -281,13 +283,16 @@ namespace PinkMilkMedia.Migrations
 
             modelBuilder.Entity("PinkMilkMedia.Models.Album", b =>
                 {
-                    b.HasOne("PinkMilkMedia.Models.Owner", "Fullame")
-                        .WithMany()
-                        .HasForeignKey("FullameId");
-
                     b.HasOne("PinkMilkMedia.Models.Owner", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
+                });
+
+            modelBuilder.Entity("PinkMilkMedia.Models.Owner", b =>
+                {
+                    b.HasOne("PinkMilkMedia.Models.Album")
+                        .WithMany("Owners")
+                        .HasForeignKey("AlbumId");
                 });
 
             modelBuilder.Entity("PinkMilkMedia.Models.Photo", b =>

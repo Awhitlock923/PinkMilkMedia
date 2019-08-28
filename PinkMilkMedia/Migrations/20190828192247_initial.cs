@@ -23,33 +23,6 @@ namespace PinkMilkMedia.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -71,6 +44,35 @@ namespace PinkMilkMedia.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    TypeId = table.Column<int>(nullable: false),
+                    AlbumId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Album",
                 columns: table => new
                 {
@@ -79,18 +81,11 @@ namespace PinkMilkMedia.Migrations
                     DateOfShoot = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     link = table.Column<string>(nullable: true),
-                    OwnerId = table.Column<string>(nullable: true),
-                    FullameId = table.Column<string>(nullable: true)
+                    OwnerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Album", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Album_AspNetUsers_FullameId",
-                        column: x => x.FullameId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Album_AspNetUsers_OwnerId",
                         column: x => x.OwnerId,
@@ -188,26 +183,22 @@ namespace PinkMilkMedia.Migrations
                 name: "Photo",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     path = table.Column<string>(nullable: true),
-                    AlbumId = table.Column<int>(nullable: true)
+                    AlbumId = table.Column<string>(nullable: true),
+                    AlbumId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Photo", x => x.id);
+                    table.PrimaryKey("PK_Photo", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Photo_Album_AlbumId",
-                        column: x => x.AlbumId,
+                        name: "FK_Photo_Album_AlbumId1",
+                        column: x => x.AlbumId1,
                         principalTable: "Album",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Album_FullameId",
-                table: "Album",
-                column: "FullameId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Album_OwnerId",
@@ -242,6 +233,11 @@ namespace PinkMilkMedia.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_AlbumId",
+                table: "AspNetUsers",
+                column: "AlbumId");
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -254,13 +250,25 @@ namespace PinkMilkMedia.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Photo_AlbumId",
+                name: "IX_Photo_AlbumId1",
                 table: "Photo",
-                column: "AlbumId");
+                column: "AlbumId1");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUsers_Album_AlbumId",
+                table: "AspNetUsers",
+                column: "AlbumId",
+                principalTable: "Album",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Album_AspNetUsers_OwnerId",
+                table: "Album");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -283,10 +291,10 @@ namespace PinkMilkMedia.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Album");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Album");
         }
     }
 }

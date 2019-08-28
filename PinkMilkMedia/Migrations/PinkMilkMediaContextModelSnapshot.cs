@@ -161,6 +161,8 @@ namespace PinkMilkMedia.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<int?>("AlbumId");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -200,6 +202,8 @@ namespace PinkMilkMedia.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AlbumId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -228,24 +232,6 @@ namespace PinkMilkMedia.Migrations
                     b.HasIndex("AlbumId1");
 
                     b.ToTable("Photo");
-                });
-
-            modelBuilder.Entity("PinkMilkMedia.Models.UserViewModel", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("EmailAddress");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<int>("Type");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -298,6 +284,13 @@ namespace PinkMilkMedia.Migrations
                     b.HasOne("PinkMilkMedia.Models.Owner", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
+                });
+
+            modelBuilder.Entity("PinkMilkMedia.Models.Owner", b =>
+                {
+                    b.HasOne("PinkMilkMedia.Models.Album")
+                        .WithMany("Owners")
+                        .HasForeignKey("AlbumId");
                 });
 
             modelBuilder.Entity("PinkMilkMedia.Models.Photo", b =>
