@@ -21,16 +21,39 @@ namespace PinkMilkMedia.Controllers
         // GET: Albums
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Album.Include(a => a.Owner).ToListAsync());
+            return View(await _context.Album.ToListAsync());
         }
 
-        public async Task<IActionResult> CPhotos(int id)
+        public IActionResult CPhotos(int id)
         {
+            ViewData["AlbumId"] = id;
+
+            
+            //if (ModelState.IsValid)
+            //{
+            //    _context.Add(photo);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
             return View();
         }
-        public async Task<IActionResult> Photos(int id)
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CPhotos([Bind("id,path,AlbumId")] Photo photo)
         {
-            return View(await _context.Album.Where(b => b.Id == id).ToListAsync());
+            if (ModelState.IsValid)
+            {
+                _context.Add(photo);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(photo);
+        }
+
+        public async Task<IActionResult> Photos(string id)
+        {
+            return View(await _context.Photo.Where(b => b.AlbumId == id).ToListAsync());
         }
 
         // GET: Albums/Details/5
@@ -62,8 +85,10 @@ namespace PinkMilkMedia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,DateOfShoot,link")] Album album)
+        public async Task<IActionResult> Create([Bind("Id,Name,DateOfShoot,Owners")] Album album, List<string> Owners)
         {
+            
+
             if (ModelState.IsValid)
             {
                 _context.Add(album);

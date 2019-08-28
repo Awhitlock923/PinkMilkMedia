@@ -7,10 +7,10 @@ namespace PinkMilkMedia.Models
 {
     public class Photo
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string path { get; set; }
+        public string AlbumId { get; set; }
+        public Album Album { get; set; }
         
-
-        public List<Album> Album { get; set; }
     }
 }
