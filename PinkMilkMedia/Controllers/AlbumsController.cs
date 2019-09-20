@@ -75,9 +75,15 @@ namespace PinkMilkMedia.Controllers
         }
 
         // GET: Albums/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var currentUsers = await _context.Users.ToListAsync();
+            var viewModel = new AlbumWrapper()
+            {
+                CurrentUsers = currentUsers
+            };
+
+            return View(viewModel);
         }
 
         // POST: Albums/Create
@@ -85,17 +91,16 @@ namespace PinkMilkMedia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,DateOfShoot,Owners")] Album album, List<string> Owners)
+        public async Task<IActionResult> Create([Bind("Id,Name,DateOfShoot,OwnerId")] Album album)
         {
             
-
             if (ModelState.IsValid)
             {
                 _context.Add(album);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(album);
+            return View();
         }
 
         // GET: Albums/Edit/5

@@ -1,4 +1,4 @@
-﻿@model PinkMilkMedia.Models.Album
+﻿@model PinkMilkMedia.Models.AlbumWrapper
 
 @{
     ViewData["Title"] = "Create";
@@ -13,24 +13,24 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Album.Name" class="control-label"></label>
+                <input asp-for="Album.Name" class="form-control" />
+                <span asp-validation-for="Album.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateOfShoot" class="control-label"></label>
-                <input asp-for="DateOfShoot" class="form-control" />
-                <span asp-validation-for="DateOfShoot" class="text-danger"></span>
+                <label asp-for="Album.DateOfShoot" class="control-label"></label>
+                <input asp-for="Album.DateOfShoot" class="form-control" />
+                <span asp-validation-for="Album.DateOfShoot" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="link" class="control-label"></label>
-                <input asp-for="link" class="form-control" />
-                <span asp-validation-for="link" class="text-danger"></span>
+                <label asp-for="Album.link" class="control-label"></label>
+                <input asp-for="Album.link" class="form-control" />
+                <span asp-validation-for="Album.link" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Owners" class="control-label"></label>
-                <select asp-for="Owners" class="form-control"
-                        asp-items="@(new SelectList(Model.Owners, "Id", "FullName"))"></select>
+                <label asp-for="Album.OwnerId" class="control-label"></label>
+                @Html.DropDownListFor(m => m.Album.OwnerId, new SelectList(Model.CurrentUsers, "Id", "FullName"))
+                
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

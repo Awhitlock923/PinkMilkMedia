@@ -19,6 +19,5 @@ namespace PinkMilkMedia.Models
 
         public DbSet<PinkMilkMedia.Models.Photo> Photo { get; set; }
         public DbSet<PinkMilkMedia.Models.Owner> Owner { get; set; }
-        //public DbSet<PinkMilkMedia.Models.UserViewModel> UserViewModel { get; set; }
     }
 }
