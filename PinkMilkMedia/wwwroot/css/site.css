@@ -9,6 +9,22 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.navbar-light .navbar-brand {
+    color: lightpink;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: lightpink;
+}
+
+.bg-dark {
+    background-color: black;
+}
+
+.text-dark {
+    color: lightpink;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
