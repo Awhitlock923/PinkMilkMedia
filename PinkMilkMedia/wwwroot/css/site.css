@@ -12,7 +12,7 @@ body, h1, h2, h3, h4, h5, h6 {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    padding-top: 25px;
+    padding-top: 50px;
 }
 
 body, html {
@@ -52,18 +52,23 @@ body, html {
     transition: 2s;
 }
 
-.w3-navbar {
-    color: lightpink;
+.w3-top {
+    top: 0;
+    background-color: ThreeDShadow;
 }
 
-    .w3-navbar.w3-animate-top {
-        color: #444;
-    }
+.w3-navbar {
+    color: white;
+}
 
-    .w3-navbar li a:hover {
-        background-color: rgba(0,0,0,0.2);
-        color: #fff;
-    }
+.w3-navbar.w3-animate-top {
+    color: #444;
+}
+
+.w3-navbar li a:hover {
+    background-color: rgba(0,0,0,0.2);
+    color: #fff;
+}
 
 .w3-center {
     white-space: pre-wrap;
@@ -110,7 +115,7 @@ body, html {
 }
 
 .samplePhoto{
-
+    max-width: 300px;
 }
 
 /*First Image (Header) */
@@ -151,7 +156,7 @@ footer > .w3-center {
     color: white;
 }
 
-/*a.navbar-brand {
+a.navbar-brand {
   font-size: 30px;
   color: lightpink;
   white-space: normal;
