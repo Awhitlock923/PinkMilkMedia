@@ -19,8 +19,12 @@ namespace PinkMilkMedia.Controllers
         }
 
         // GET: Albums
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Album album, Owner owner)
         {
+            if (album.OwnerId == owner.Id)
+            {
+                return View(_context.Album.ToListAsync());
+            }
             return View(await _context.Album.ToListAsync());
         }
 

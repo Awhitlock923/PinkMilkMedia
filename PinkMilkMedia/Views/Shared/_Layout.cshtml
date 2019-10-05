@@ -31,61 +31,61 @@
     <script src="~/js/parallax.min.js"></script>
 </head>
 
-    <header>
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">*@
-            <div class="w3-top">
-                <ul class="w3-navbar" id="myNavbar">
-                    <li><a href="#" class="w3-padding-large"></a></li>
-                    <div class="float-right">
-                        <li class="w3-hide-small w3-left">
-                            <a class="nav-link text-pink w3-padding-large" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="w3-hide-small w3-left">
-                            <a class="w3-padding-large" asp-area="" asp-controller="Albums" asp-action="Index">Albums</a>
-                        </li>
-                        <li class="w3-hide-small w3-left">
-                            <partial name="_LoginPartial" />
-                        </li>
-                    </div>
-                </ul>
+<header>
+    @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">*@
+    <div class="w3-top">
+        <ul class="w3-navbar" id="myNavbar">
+            <li><a href="#" class="w3-padding-large"></a></li>
+            <div class="float-right">
+                <li class="w3-hide-small w3-left">
+                    <a class="nav-link text-pink w3-padding-large" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li class="w3-hide-small w3-left">
+                    <a class="w3-padding-large" asp-area="" asp-controller="Albums" asp-action="Index">Albums</a>
+                </li>
+                <li class="w3-hide-small w3-left">
+                    <partial name="_LoginPartial" />
+                </li>
             </div>
-               
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </ul>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - PinkMilkMedia - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    </div>
+    </nav>
+</header>
+<div class="container">
+    <partial name="_CookieConsentPartial" />
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-        </script>
-    </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2019 - PinkMilkMedia - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+</footer>
 
-    @RenderSection("Scripts", required: false)
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+    </script>
+</environment>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@RenderSection("Scripts", required: false)
 
 </html>

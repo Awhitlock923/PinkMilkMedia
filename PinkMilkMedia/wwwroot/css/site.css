@@ -180,6 +180,14 @@ a.navbar-brand {
     color: lightpink;
 }
 
+.table{
+    color: lightpink;
+}
+
+.DisplayP {
+    padding: 50px;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 /*html {
