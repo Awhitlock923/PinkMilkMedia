@@ -23,11 +23,6 @@
                 <span asp-validation-for="Album.DateOfShoot" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Album.link" class="control-label"></label>
-                <input asp-for="Album.link" class="form-control" />
-                <span asp-validation-for="Album.link" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Album.OwnerId" class="control-label"></label>
                 @Html.DropDownListFor(m => m.Album.OwnerId, new SelectList(Model.CurrentUsers, "Id", "FullName"))
                 
